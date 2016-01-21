@@ -1,0 +1,30 @@
+Assignment 1: Due 11:59PM Feb. 27th
+
+Using Test First Development (no code without test first) implement the minesweeper game
+you designed in hw2. Feel free to evolve that design and use your judgment to make changes
+based on the improved understanding and learning.
+
+Take small steps, ask for frequent reviews.
+
+Program works and able to play the game [20pts]: -20
+gradle -q
+gives the error
+javax.imageio.IIOException: Can't read input file!
+Unable to run the program
+
+If the build fails, you should either fix it or ask for help.
+Please explain what's going on here for regrading of this part.
+
+All tests pass [20 pts]: 
+Test quality [20 pts]:
+Code quality [10 pts]: 
+
+Test coverage [10 pts]: -1
+
+Design quality [10 pts]:
+
+Overall quality [10 pts]: -5
+Mouse: Poor quality, too much code.
+MinesweeperUI: Very poor quality, long methods, does not follow some basics of JFrame coding practices.
+
+Total [100pts]: 74
