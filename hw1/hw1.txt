@@ -1,0 +1,55 @@
+Update this file with your answers. Feel free to add any additional files, if you like, in this HW1 directory.
+
+Files you check in outside of specific homework or assignment directory will not be reviewed or graded for that homework/assignment.
+
+Check in and modify files as many times as you like. You will not be able to modify the files after the deadline.
+
+You will work as a pair, both of you are responsible for the completed work in all assignments and homework. 
+Each of you are expected to put in your reasonable share of effort into it.
+
+The deadlines are strict, there will be no extensions. Don't email any code to Venkat.
+Your last check in before the deadline will be graded. So, if you break code (in assignments) before the deadline, you will lose.
+
+Please feel free to ask for frequent reviews (see the readme.txt file in the reviews folder for details on how to ask for reviews).
+
+You can evolve the answers and solutions based on the reviews to your pair and to other pairs in the course.
+Only the latest checkin at the time of review will be looked at. Also the final check in will be the only one graded.
+
+Please read the academic honesty policy posted on the course mailing list.
+
+Now to homework #1.                
+---------------------------------------------------------------------------------------------------------------------
+HW1: Due 11:59PM February 6th
+
+Q1. What's simple design? 
+
+A simple design is a design that is easy to understand, easy to maintain, small, and fails gracefully. You should be able to grasp and understand a simple design quickly. It should not contain anything unnecessary. The simple design should fail less, and even if it fails, it should fail in a way that is also simple.  
+
+Q2. Why should design be simple?
+
+A simple design cost less, is easier to understand, less likely to fail and easier to fix.
+
+Because the design is simple, it definitely cost less time and effort designing one. Also when we change the design during implementation or the design fail at some point, the cost of changing also less with simple design.
+
+With a short and minimum design, understanding the design will only take a matter of second. Developers can fully understand of the design quick and easy, especially at the starting time when everything is vague.
+
+Anything that is simple is always easier to fix and less likely to fail than a complex one. This fact is also for design. Developing with a simple design would less likely to fail. Failing is unavoidable, but with simple design we can fix it with less cost (time, money and effort).
+
+
+Q3. In your experience, from what you've seen, has there been problems with design not being simple or benefits from it being simple?
+Give examples of situations and impact.
+
+ Last semester, I and my group of total of 6 students did a project about making an online shopping website. We have to follow all the steps on the incremental and interactive approach, but it turn out that we were following waterfall design where we did all the design at the beginning. So we did not change our design at all during implementation phase. Designing beforehand was very beneficial for us. However, since we did not have any experience designing, the UML diagram is a mess. Therefore, when we code, it was so hard for us to follow the design. We kept fixing the code and did not bother touching the design again but base on the acceptance test cases. We did end up have a decent website managed to pass the acceptance testing but it cost a lot more time and effort.
+ Back in high school we learned to keep code simple for computer science contests. During the hands on portion of the contest we were given a set of problems and two hours to solve as many as we can. Because of the time constraint, we didn’t want to spend time over thinking the problem and making things more complex than it needs to be. We were also in teams of three, so the solutions we came up with should be easy to understand. If there was a problem with a solution, we could help each other out. The time limit also caused us to keep the code short and simple because we were only allowed one computer, and we didn’t want someone to spend too much time working on one problem. Because we tried to keep the designs simple, we were able to do well in many of these contests.
+
+Total [10]: 8
+
+1.
+Good
+
+2. -1
+Need to bring out motivations for benefit first, then reason and substantiate.
+
+3. -1
+Need to bring out concretely the impact of complexity and/or simplicity.
+Write short paragraphs.

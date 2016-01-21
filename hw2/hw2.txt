@@ -1,0 +1,117 @@
+Homework 2: Due 11:59PM Feb. 13th
+
+In this homework we'll create an initial strategic design for a version 
+of the minesweeper game.
+
+Let's first describe the version of the game that we'll design. We'll
+not be writing any code in this homework, but only creating an initial 
+design.
+
+The object of the game is for a player to find and seal all ten hidden 
+mines among hundred cells (10x10 cells). The mines may be in any random
+location.
+
+There are three types of cells: mined cell, adjacent cell, empty cell. 
+
+A mined cell has a hidden mine.
+
+An adjacent cell is next to one or more mined cells and knows the 
+number of mines next to it. This number is not revealed to the user 
+initially. 
+
+Last, an empty cell has no mine and is not next to a mined cell.
+
+At the start of the game all cells are displayed grayed out, the player 
+has no initial clue which cells are mined, adjacent, or empty. The user 
+can either expose a cell or seal it.
+
+The player would seal a cell that is suspected to have a mine. Only an 
+unexposed cell can be sealed. A sealed cell is shown with a seal symbol. 
+If a cell is sealed, the player can unseal it and it will turn gray again. 
+
+Only an unexposed cell can be exposed. 
+
+Several actions may take place when an empty cell is exposed. First, when 
+an empty cell is exposed, it's emptiness is shown. Immediately, all
+unsealed cells next to the exposed empty cell are also exposed. Any sealed 
+cell is left unchanged.
+
+When an adjacent cell is exposed (either due to users direct action or due 
+to the successive action from exposing of a neighboring cell) it's count 
+is shown and no further action happens. 
+
+If a mined cell is exposed (either due to users direct action or due to 
+the successive action from exposing a neighboring cell) the mine is shown 
+and the game ends.
+
+There are two outcomes of the game. The player wins after sealing all the 
+mines and exposing all the other cells. The player loses if a mined cell 
+is exposed.
+
+Create an initial design of this program and answer the questions below. 
+Feel free to ask frequent reviews.
+
+---------------------------------------------------------
+
+
+How would you design this program? 
+
+Include a separate file (may be a scan of hand drawn picture if you like, or a pdf, tiff, word document, etc.) which shows a UML diagram of your design. Refer to that diagram from the text description you write here.
+
+
+Look at Image.jpg to see a class diagram.
+
+We have four classes GameGrid, Cell, MineCell, EmptyCell, and NumberCell.
+The Game Grid class contains one hundred Cells. It has three methods generate mines, run and reveal neighbor. Generate mines is a void function that will create the cells, place the mines, and set the numbers.
+
+Run method will take in  a X position, Y position, and a button Boolean. Run will call the revel or set flag method of the cell at the x and y positions. Run returns a string based on the state of the game. It will return game over if a mine was revealed. Win will be returned if you win, and continue will be returned if the game keeps going.
+
+Reveal neighbor is a recursive function that will be called when an empty cell is revealed.
+
+Cell is the parent class of MineCell, EmptyCell, and NumberCell. It has five attributes xpos, ypos, covered, flagged, and name. xpos and yops is the position of the cell. Covered tells if the cell is revealed to the player. Flagged tells if the cell can be revealed or not.
+
+When a sub class is initiated it will set name to the name of the class. Covered will be true and flagged will be false. 
+
+Cell also has two methods reveal and set flag. Set flag will switch the flagged boolean.
+Reveal will be used by the grid to reveal the cell. It will return a string to tell the grid what to do. 
+
+NumberCell has one other attribute value. This reflects how many mines are around it, and the method increment will increase the value by one.
+
+------------------------------------------------
+
+
+
+Discuss what language you would use.
+
+The language we will use is java. We are both familiar with java's Jframe and graphics. Java's windows and graphics are built in so we don't need to import any new packages. Java also has mouse event built in. With this we can make a simple graphics user interface for the program.
+
+
+-----------------------------------------------
+
+
+How'd you structure the program, what libraries would you use?
+
+Because we are using java we don't need to include any libraries. We will use Jframe for the user  interface.
+
+This is how some of the game logic will work.
+
+How we are going to check if the player has won. At the end of run we will scan the cells and check how many cells are still covered. If more than 10 cells are still covered then we know that the player has not won. 
+
+The player will lose if the reveal method returns a mine.
+
+If set flag is called then it will reverse the value of flagged.
+
+What reveal does. It first finds out if it has already been revealed or it has been flagged. If it is then it return a space. If it can be revealed then covered will be false and it will return name.  
+
+When an empty cell is revealed we will call revealNeighbor with the x and y position of the cell. RevealNeighbor will call reveal on all adjacent cells, and if the cell is empty we call revealNeighbor on that position.
+
+How the grid will be generated. First it will randomize 10 non-conflicting positions for the mines. Then it will create new mine cells in those locations. Then it will create new number cell in all cells around the mine cells. If the cell is already number then call the increment method. If it is a mine don't create a new cell. Finally it will fill in the rest of the cells with empty cells.
+
+For the GUI we will have twelve images. The images will be a covered cell, a revealed empty cell, a mine, a flag, and eight numbers from one to eight. We can give each cell class a different draw method. All cells can draw a covered cell, and a flag. The empty cell can draw a revealed empty cell. The mine can draw a mine, and number can draw the number based on the value. The grid will just call all of the draw methods. The cells will draw based on its location and a set size.
+
+How the user can input with the program. We will use java's mouse event listener to get the button and the coordinate of the mouse. To find what cell the mouse is over we just subtract the mouse position by the position of the top corner of the cell. Then we do an integer division by the size of the cell image.
+
+Total [10]: -2
+The logic depending on the GUI is not a good idea, this is strong coupling and makes it hard to
+select an alternate GUI.
+Need to show more details on what the GUI performs and how it's different from the core logic.

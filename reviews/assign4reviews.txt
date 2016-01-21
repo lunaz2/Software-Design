@@ -1,0 +1,129 @@
+[Venkat 04/16/15 05:07 AM MDT]
+review: Look for duplications.
+
+StringWriterWithRemoveDuplicateOperatorTest:
+StringWriterWithLowerCaseOperatorTest:
+These two do the same thing, set a transformer, send a data, verify
+it is as expected. We can remove that duplication.
+
+------------------------------------------------------------------------------
+[Venkat 04/15/15 06:16 AM MDT]
+review: Keep an eye on DRY in tests too.
+
+BaseWriter:
+Indent code properly. Reduce unnecessary line breaks also.
+
+Remove duplications in tests.
+
+------------------------------------------------------------------------------
+[Venkat 04/14/15 05:21 AM MDT]
+review: Keep it DRY
+
+FileWriter: Fails DRY.
+
+------------------------------------------------------------------------------
+[Venkat 04/13/15 05:23 AM MDT]
+review: Excellent progress
+
+Move forward.
+
+------------------------------------------------------------------------------
+[Venkat 04/12/15 04:27 AM CDT]
+review: Excellent progress
+
+Move forward.
+
+------------------------------------------------------------------------------
+[Venkat 04/11/15 06:34 AM CDT]
+review: Excellent progress.
+
+StringWriterWithOperatorTest:
+Keep the focus here on one class. To test another class, write
+another test class. Then a third class to mix two together.
+
+StupidReplaceOperatorTest:
+good
+
+------------------------------------------------------------------------------
+[Venkat 04/10/15 14:11 PM EEST]
+review: nice progress
+
+StringWriterTest:
+good
+
+LowerCaseOperatorTest:
+good
+
+StringWriterWithOperatorTest:
+Nice tests here.
+
+StringWriter:
+Write: Break long line, indent to improve readability.
+
+------------------------------------------------------------------------------
+[Venkat 04/09/15 11:03 AM EEST]
+review: Don't rush, take time to evolve, one thing at a time.
+
+StringWriterTest:
+good
+
+LowerCaseOperatorTest:
+good
+
+LowerCaseOperator:
+See suggestions in code.
+
+StupidReplaceOperatorTest: Delete, let's not rush, let's get 
+one thing done well first.
+
+WriterOperator: Delete
+StupidReplaceOperator: Delete
+
+StringWriterWithOperatorTest:
+See suggestions in code.
+
+LowerCaseOperator: See suggestion in code.
+
+StringWriter: See suggestion in code.
+
+C# method names start with uppercase. Examine all files to conform to this.
+
+------------------------------------------------------------------------------
+[Venkat 04/09/15 01:08 AM IST]
+review: refactor
+
+StringWriterTest:
+This has moved from the focus of write to lowercase operation.
+May be that test should go into another test class.
+
+writeStringToWriterWithLowerCaseOperator:
+Looks noisy. Start with one, not a list, we can move to a list
+later as needed.
+
+WriterOperator: Remove, triangulate, bring in only when there is
+more than one implementation.
+
+StringWriter:
+Use Aggregate instead of foreach.
+
+Make field names start with lowercase letters.
+
+------------------------------------------------------------------------------
+[Venkat 04/08/15 04:22 AM IST]
+review: Good so far
+
+StringWriterTest:
+Good
+
+StringWriter:
+For the field, since String is immutable, instead of changing the
+reference with += use a mutable version to which we can append.
+
+------------------------------------------------------------------------------
+[Venkat 04/07/15 04:27 AM IST]
+review: take small steps.
+
+A lot of code for the first review. Delete and start over with one class
+and just a few tests.
+
+------------------------------------------------------------------------------

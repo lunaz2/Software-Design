@@ -1,0 +1,54 @@
+[Venkat 04/30/15 06:00 AM MDT]
+review: A good decision sometimes is not to decide.
+
+4. Because both will work, why not say we could use either and be done with it.
+We really have no reason to restrict.
+
+------------------------------------------------------------------------------
+[Venkat 04/29/15 02:46 AM MDT]
+review: revisit 4
+
+4. Reduce first paragraph to mention the options, No need to discuss the differences
+between these options. In the second paragraph, remove assumptions ("if our Drone is a class" - 
+we know it is not, so don't hypothesize), keep the problem to what's given. Do we have any 
+flexibility at all or is the given problem really forcing us one way or the other. Don't assume 
+a particular answer and then justify it. Instead analyze the specifics and see if there is one 
+we have to choose or we can give ourselves some flexibility.
+
+------------------------------------------------------------------------------
+[Venkat 04/28/15 05:52 AM MDT]
+review: good so far
+
+1. good
+2. good
+3. good
+
+4. Reduce to two paragraphs. First paragraph, tell us the options. Second paragraph,
+tell us why you choose one over the other.
+
+------------------------------------------------------------------------------
+[Venkat 04/27/15 05:38 AM MDT]
+review: revisit
+
+2. We don't have the ability to change the given Drones. The solution would not work
+as suggested here.
+
+3. Revisit this after fixing 2.
+
+4. "if the Drone is a class instead of an interface" Is Drone an interface or a class,
+it would be one or the other, there should be no if here.
+
+"Some language does not provide" Talk about one language, reduce hypothetical discussions
+to concrete scenario. Shorten, make clear recommendations. Suggest variations that are
+definitely possible (not hypothetically) and mention if your decision changes based on that.
+
+------------------------------------------------------------------------------
+[Venkat 04/26/15 11:03 AM CEST]
+review: good so far
+
+2. Do we have to change Drone1 for this purpose?
+
+4. Is there an assumption we're making here or would this solution work
+irrespective of any constraints?
+
+------------------------------------------------------------------------------

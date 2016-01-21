@@ -1,0 +1,361 @@
+[Venkat 02/26/15 13:07 PM MST]
+review: Check the build.
+
+Make sure gradle runs your UI when you run gradle -q command.
+Gradle is failing first because you changed the class name.
+It's also failing because of path. If gradle files, I don't
+review. Check that before asking for review and ask for help 
+if you need.
+
+------------------------------------------------------------------------------
+
+[Venkat 02/25/15 08:23 AM MST]
+review: nice progress
+
+GUI:
+Delete commented out code.
+
+MinesweeperTest:
+countTenMines:
+Don't use mocked object here, use mocked object only when it is absolutely needed.
+Use the non-mocked objects otherwise.
+
+assertEquals(10, minesweeperToDesignExpose.countMines());
+No reason for the Minesweeper to have a countMines method. This should
+be in the test.
+
+countAdjacentMineOnCellOutOfRowLowerBound:
+I don't understand this test. It is testing reveal and not count adjacent
+mines. Also, if a mine is out of bounds, the count can simply be zero,
+no need for exception.
+
+isAdjacentAt: need more test for this.
+
+isGameInProgress:
+Replace three methods stillProgress, losing, winner wth getGameStatus.
+
+isMineAtRandomLocation: Don't use any mocks here.
+is not same the correct assert to use?
+
+Minesweeper:
+Give one blank line before the class.
+
+Random r = new Random(); Give a better name than r.
+
+countMines: remove
+
+isMineAt: Write tests for row - 1 and check this returns false.
+Likewise for row 10, column -1,...
+
+isEmptyAt: Can remove checkInBound.
+isAdjacentAt: Can remove checkInBound.
+
+stillProgress: return an enum. and change to getGameStatus.
+
+winner: simplify and move to getGameStatus.
+
+losing: remove
+
+reveal: use isAdjacentAt here instead of countAdjacentMine.
+
+checkInBound change to checkBounds.
+
+------------------------------------------------------------------------------
+
+[Venkat 02/24/15 06:59 AM MST]
+review: good progress
+
+MinesweeperTest:
+change
+Minesweeper minesweeperToDesignWinning;
+to
+Minesweeper minesweeper;
+
+In setUp:
+change
+neighborCells = new ArrayList<Integer>();
+to
+neighborCells = new ArrayList<>();
+
+change
+minesweeperToDesignWinning = new Minesweeper();
+to
+minesweeper = new Minesweeper();
+
+revealCellOutOfRowLowerBound: There's so much duplication between
+this test and the following tests. Remove them, use the checkBounds 
+function. Learn the language you're using.
+
+}
+//Add a blank line here.
+@Test
+
+flagCellOutOfRowLowerBound: more duplication.
+
+unflagCellOutOfRowLowerBound: more duplication.
+
+countAdjacentMine: Not so fast, just one test?
+Write multiple tests. count adjacent for row -1, row 10, ....
+count adjacent for cell 3, 2 where there is only one mine and that's at that
+same location.
+
+isEmptyCell: Not so fast, just one test?
+is an empty cell also adjacent. Is a mined cell also empty?
+
+isGameOver:
+Redesign. Test on a method in stead of state.
+Write test for game in progress
+the game lost
+then game won.
+
+Test for there are 10 mines.
+Test for there are mines at random location.
+
+isWin:
+Not enough. Set mines right diagonally. Expose all mines not at position
+i, i and seal mines at position i, i. Then check for win.
+
+Minesweeper:
+Don't write code unless test fails, then write minimum code.
+
+countAdjacentMine:
+Use a loop, so much duplication.
+
+reveal:
+cells[row][column] = Cover.REVEALED; is done twice - remove one.
+Actually, it's done thrice!
+
+Proceed to implement the GUI.
+
+------------------------------------------------------------------------------
+
+[Venkat 02/23/15 07:26 AM MST]
+review: Nice progress
+
+MinesweeperTest:
+revealCellOutOfRowLowerBound: there is a good amount of duplication between
+this test and other similar tests. See the example give to remove that duplication.
+
+change
+neighborCells = new ArrayList<>();
+to
+neighborCells.clear();
+
+placeAMine:
+We don't need this. User will never call this method directly.
+
+placeAMineOutOfRowLowerBound - remove
+
+revealWillNotCallRevealNeighborOnMineCell:
+Change 
+minesweeperToDesignExpose.mine(2, 3);
+to
+minesweeperToDesignExpose.mines[2][3] = true;
+
+revealWillNotCallRevealNeighborOnAdjacentCell:
+Big jump, we have to build tests that help us evolve code to find
+if a cell is adjacent. Then we can come to this test.
+
+Minesweeper:
+public int[][] adjacents = new int[SIZE][SIZE]; Remove.
+We only need a boolean[][] of mines.
+
+Give space around operators like && and ?=. 
+
+Here's a good progression of tests:
+...
+seal a cell
+unseal a cell
+exposing a sealed cell does not propagate a call to try to expose neighbor
+is there a mine
+count adjacent mines
+is this an adjacent cell
+is this an empty cell
+exposing an adjacent cell does not propagate a call to try to expose neighbor
+check if game lost because a mine was sealed
+check if game won because...
+place mines at random locations
+
+------------------------------------------------------------------------------
+
+[Venkat 02/22/15 07:48 AM MST]
+review: Very nice progress
+
+MinesweeperTest:
+List<Integer> adjacentCells; Remove
+
+setUp:
+adjacentCells = new ArrayList<Integer>(); Remove
+
+RevealACell: good
+
+RevealAnAlreadyRevealCell: good
+
+revealCellOutOfRowLowerBound:
+Exception tests should be of the form:
+try {
+	...code to test...
+	fail("Expected whatever exception for whatever reason");
+} catch(NameOfTheExpectedException ex) {
+  assertTrue(true);
+}
+
+revealEmptyCellWillRevealNeighborCell: good
+
+revealingARevealedCellWillNotTryToRevealNeighbors: good
+
+revealNeighborCallsRevealWhenValidCellIsGiven: 
+Change setUP like this:
+minesweeperToDesignRevealNeighbor = new Minesweeper(){
+    @Override
+    public void reveal(int row, int column) {
+      revealCalled = true;
+    }
+};
+
+Then in this test do:
+minesweeperToDesignRevealNeighbor.revealNeighbor(2, 3);
+assertTrue(revealCalled);
+
+revealNeighborWillNotCallExposeOutOfRowLowerBound:
+change to
+minesweeperToDesignRevealNeighbor.revealNeighbor(-2, 3);
+assertFalse(revealCalled);
+
+flagACell: good
+flagARevealedCell: good
+flaggedCellCannotBeRevealed: good
+unflagAFlaggedCell: good
+unflagARevealedCell: good
+
+revealNeighborWillNotCallRevealOnAFlaggedCell: 
+This test is wrong. It should be revealWithNotCallRevealNeighborOnAFlaggedCell.
+Change body of the test to:
+minesweeperToDesignExpose.flag(2, 3);
+minesweeperToDesignExpose.reveal(2, 3);
+List<Integer> empty = new ArrayList<>();
+assertEquals(empty, neighborCells);
+
+Remove the blank line before package in both the files.
+
+Make sure all tests pass, check in code. Then proceed to write more tests for:
+
+when an adjacent cell is exposed it does not call tryToExpose
+when a mined cell is exposed it does not call tryToExpose
+Keep in mind, minimum code.
+
+------------------------------------------------------------------------------
+
+[Venkat 02/21/15 06:16 AM MST]
+review: Write a lot, delete a lot
+
+Oh my, that's boat load of tests. Slow down. Take small steps.
+Write a lot, delete a lot. Just one clear decisive design decision at a time.
+
+300 lines of code in the Minesweeper class. We definitely will not need
+that much code. 
+
+Don't panic, I have deleted all that code you rushed to write. It is all 
+in the version control if you ever need them, but I bet you would not need.
+
+Start with the code that's there right now and work through these tests (only -
+don't rush and create a boat load of code).
+
+revealEmptyCellWillRevealNeighborCell is done well. Good. Now, write these
+tests.
+
+1. revealingARevealedCellWillNotTryToRevealNeighbors
+In this test do
+minesweeper.reveal(2, 3);
+neighborCells = new ArrayList<Integer>();
+
+List<Integer> empty = new ArrayList<>();
+minesweeper.reveal(2, 3);
+assertEquals(empty, neighborCells);
+
+After the tests pass, refactor 
+Minesweeper minesweeper;
+to
+Minesweeper minesweeperToDesignExpose;
+
+Make sure all tests pass.
+
+Now, write a test for revealNeighbor. Since this method is mocked out in
+minesweeperToDesignExpose, we can't use that object, So, create another
+test object, say minesweeperToDesignRevealNeighbor.
+
+Here are some tests for revealNeighbor.
+1. revealNeighbor calls expose when valid cell is given.
+2. revealNeighbor will *not* call expose for our of row lower bound
+3. ... row upper bound ...
+4. ... column lower bound ...
+5. ... column upper bound ...
+
+Only implement these tests and make them pass. Keep the tests and code
+minimum.
+
+------------------------------------------------------------------------------
+
+[Venkat 02/20/15 05:57 AM MST]
+review: Looking forward to the next interesting test
+
+MinesweeperTest:
+
+change
+}
+@Test
+to
+
+}
+
+@Test
+
+Add one blank line between methods.
+
+change
+reveal(0,0)
+to
+reveal(0, 0)
+Give a space after comma.
+
+Cover.REVEALED,minesweeper
+to
+Cover.REVEALED, minesweeper
+
+revealCellWillTryToExposeNeighbor: Good next test to write, looking forward
+to seeing this.
+
+Minesweeper:
+public enum Cover {REVEALED,COVERED};
+to
+public enum Cover {REVEALED, COVERED};
+
+------------------------------------------------------------------------------
+
+[Venkat 02/19/15 04:41 AM MST]
+review: Take small steps
+
+Too much code for the first review. Delete everything and start over.
+
+Directly under assign1 create these folders:
+src/minesweeper
+test/minesweeper
+
+Put just one class in the src/minesweeper folder.
+Make this class belong to package named minesweeper.
+
+Put one test class in the test/minesweeper folder.
+Make this test class belong to package named minesweeper.
+
+Write two or three tests at most in the test class and minimum code in
+the class in the src to make those two or three tests to pass.
+
+Give good name for the class and name the test as <TheClassName>Test.
+
+I've created a build file to run the tests from the command prompt.
+Type gradle to run the tests and make sure all tests are passing before
+checking in any code change. You need to download Gradle from http://www.gradle.org
+and set the path to it before you can run gradle.
+
+------------------------------------------------------------------------------
+

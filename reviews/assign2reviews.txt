@@ -1,0 +1,285 @@
+[Venkat 03/12/15 17:50 PM EDT]
+review: refactor
+
+WeatherCheckerTest:
+ParseWeatherJSONReturnCorrectOutput:
+No need to call Parse here in the test. Send a json string which is a string
+object to the parseWeatherJSON method.
+
+getDataFromWeatherServiceReturnJSON:
+The getDataFromWeatherService should be returning a string which has
+json, not a json object.
+
+getCityDataCalled2Methods:
+This should assert to check that the two method were actually called,
+not check for the actual result of Houston.
+
+WeatherCheckerData:
+public string Error { get; set; }
+to
+public Exception Error { get; private set; }
+
+Equals: Remove, this is not a good idea. Not needed in production code.
+
+WeatherChecker:
+getWeatherData:
+Looks quite crowded and hard to read.
+Give proper indentation and clarity to code.
+
+------------------------------------------------------------------------------
+
+[Venkat 03/11/15 06:16 AM EDT]
+review: check SRP, take small step.
+
+getWeatherDataWhenNoService:
+The expected should be
+new List<WeatherCheckerData>(), new List<string>(), new List<string>(), new List<WeatherCheckerData>().
+
+No need to convert the WeatherCheckerData to string.
+Also, keep the exception details in the WeatherCheckerData for the last list.
+
+ParseWeatherJSONReturnCorrectOutput:
+Until this test, the test class focused on core logic. Now it is shifting
+focus to parsing and working with the web service. Having this here will
+violate SRP. Move this to a separate test class.
+
+dynamic weatherJSON = JObject.Parse(jsonString); Remove this, give
+the jsonString to the parseWeatherJSON function. Let it take care
+of doing the conversions.
+
+It would be better for this function to return a WeatherCheckerData object.
+
+getDataFromWeatherServiceReturnJSON:
+Big jump. We need tests for making a call to the service and getting
+raw json data. Negative and exception tests for that.
+
+Then the test for getDataFromWeatherService need to only check if the
+above two methods were called.
+
+Remove comments from code.
+
+IWeatherService:
+This should have only one method, getDataFromWeatherService.
+The other methods are internal to the implementation.
+
+------------------------------------------------------------------------------
+
+[Venkat 03/10/15 06:04 AM MDT]
+review: refactor and move forward.
+
+WeatherCheckerTest:
+getWeatherDataWhenNoService:
+getWeatherData should take city names and return an object which has four
+pieces of information in it: the sorted data, the hottest cities, the
+coldest cities, a list of data with error for cities that failed.
+
+getWeatherDataReturnWeatherDataForCitiesList:
+Change the output format to the details mentioned above.
+
+getWeatherDataReturnWeatherDataForEmptyCitiesList:
+This should return an object with four empty lists.
+
+getWeatherDataWithErrorCityInList:
+This should have an object with four list, sorted data for valid cities,
+hottest cities among valid cities, coldest cities from valid cities, 
+list of errors for cities that failed.
+
+Remove comments from code. Take next steps, try out ideas, then ask for 
+feedback.
+
+WeatherCheckerData:
+Have another property here to store the exception to note any thing that
+goes wrong with getting data for the city.
+
+WeatherChecker:
+getMaxTemperature:
+Use functions like Max, Where, Select to write code here in functional style.
+See refactoring suggestion in code.
+
+getWeatherData: Change this to functional style, using functions like
+Where and Select instead of foreach.
+
+------------------------------------------------------------------------------
+
+[Venkat 03/09/15 06:54 AM MDT]
+review: refactor and move forward.
+
+WeatherCheckerTest:
+
+getSortWeatherDataRemoveDuplicatedCity: Remove this, we can take care
+of duplication at a higher level. Duplicated data, duplicated sorting at
+this level. This will remove some unnecessary code in the method.
+
+getHottestCity:
+getMaxTemperature: Rename as getMaxTemperatureCities.
+
+Don't rush to coldest, stay with hottest city for more tests.
+Then move to coldest cities tests.
+
+getColdestCity: Move this after all tests related to hottest cities.
+
+getWeatherDataWhenNoService:
+getWeatherData: This should return three pieces of data, the sorted data,
+the hottest cities, and the coldest cities.
+
+getWeatherDataWithErrorCityInListIgnoreErrorCity:
+This should give us the error details so that we can have that error
+detail displayed to the user in the ui layer.
+
+WeatherCheckerData.cs:
+Don't put multiple classes/interfaces in one file.
+
+WeatherChecker:
+getSortedWeatherData:
+See refactoring in code.
+
+getMaxTemperature:
+Instead of foreach, use methods like you've used in getSortedWeatherData.
+
+getWeatherData:
+Remove commented out code. Return three pieces of information from
+this method. Also, capture and return error details.
+
+------------------------------------------------------------------------------
+
+[Venkat 03/08/15 08:37 AM MDT]
+review: build failed
+
+>nant
+
+Buildfile: file:///.../assign2
+/default.build
+Target framework: Microsoft .NET Framework 4.0
+Target(s) specified: clean-build-all
+
+
+clean:
+
+
+compile:
+
+    [mkdir] Creating directory '...\assign2\build\classes'.
+      [csc] Compiling 3 files to '...\assign2\build\classes\assign.dll'.
+
+compileTests:
+
+    [mkdir] Creating directory '...\assign2\build\testClasses'.
+      [csc] Compiling 2 files to '...\assign2\build\testClasses\AssignTest.dll'.
+      [csc] ...\assign2\CheckW
+eatherTest\WeatherCheckerTest.cs(7,13): error CS0234: The type or namespace name
+ 'Mocks' does not exist in the namespace 'NUnit' (are you missing an assembly re
+ference?)
+      [csc] ...\assign2\CheckW
+eatherTest\WeatherCheckerTest.cs(17,17): error CS0246: The type or namespace nam
+e 'DynamicMock' could not be found (are you missing a using directive or an asse
+mbly reference?)
+
+BUILD FAILED
+
+------------------------------------------------------------------------------
+
+[Venkat 03/06/15 05:21 AM CST]
+review: Avoid state as much as possible.
+
+Keep an eye on the coverage report. If you find a code is not covered, either
+remove the code or find out what tests are missing.
+
+CheckWeatherTest:
+private CheckWeatherClass TwoSameTemperature; remove
+
+CheckWeatherClass: Rename as WeatherChecker (noun form instead of verb form).
+Rename the test to WeatherCheckerTest. 
+
+SetUp:
+This test tells us that we're creating an instance of CheckWeatherClass and
+polluting it with state. This is not necessary. We don't have to burden this
+class with any state at this time. Instead do the following:
+
+Create an object of CheckWeatherClass and call a method getSortedWeatherData.
+To this method pass a list of city data. The method has everything it needs
+in the parameter and so there is no need for any state in the object.
+It can then do the sorting and return the data to you.
+
+Then write more tests for getSortedWeatherData. Negative tests, what if scenarios,
+think about different variations in data that we can send to the getSortedWeatherData
+method and test how it handles them.
+
+getMaxTemperatureCity:
+rename getMaxTemperature to getHottestCities.
+For this function send a list of weather data as parameter. Then check what
+it returns. Write multiple tests, again what-if scenarios.
+
+
+getMinSameTemperatureCity:
+Instead of "city1 city2", return ["city1", "city2"] as a list.
+
+getEmptyCities - we don't want to get empty cities. Write the test name so
+we know what we're testing and what to expect. getSortedWeatherDataForEmptyWeatherData
+could be the method name, for example.
+
+CheckWeatherData: Move this to a separate file.
+
+private String weather, city;
+to
+public string City { get; private set; }
+public string Condition { get; private set; }
+
+In .NET we use string instead of String.
+We don't write getters in C# like we do in Java, instead we use properties,
+like the above example.
+
+change
+public CheckWeatherData(String City, String Temperature, String Weather)
+{
+    city = City;
+    temperature = Convert.ToDouble(Temperature);
+    weather = Weather;
+}
+to
+public CheckWeatherData(string city, double temperature, string condition)
+{
+    City = city;
+    Temperature = temperature;
+    Condition = condition;
+}
+
+ToString - remove
+
+CompareTo - remove
+
+CheckWeatherClass: Rename like mentioned above.
+
+List<CheckWeatherData> weatherData = new List<CheckWeatherData>(); remove, don't pollute with state.
+
+public CheckWeatherClass() { } - remove
+
+Add - remove
+
+getCities - rename to getSortedWeatherData.
+
+getMaxTemperature: Take parameters.
+
+------------------------------------------------------------------------------
+
+[Venkat 03/05/15 06:51 AM MST]
+review: organize code.
+
+Create one sln project.
+Within that one sln project create *two* class libraries.
+The first class library should host the tests.
+The second class library should host the actual code.
+Use NUnit to write the tests instead of using VStesting tool.
+
+------------------------------------------------------------------------------
+
+[Venkat 03/03/15 05:59 AM CST]
+review: Organize code, refocus
+
+Create a sln with two libraries in it, one for the code and one for
+the tests. Check in the sln, and the project structure in svn.
+
+Also, refocus your tests to start with the core logic.
+See <https://groups.google.com/d/msg/uhcss15sd/5DsmgL0LYKQ/5EJrSC2oeYwJ>.
+
+------------------------------------------------------------------------------
+

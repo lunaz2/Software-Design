@@ -1,0 +1,94 @@
+[Venkat 03/30/15 04:48 AM MDT]
+review: You're done!
+
+Excellent work.
+
+------------------------------------------------------------------------------
+[Venkat 03/29/15 06:03 AM MDT]
+review: You're done!
+
+MemoizedRecursiveFibonacci:
+See refactoring suggestion in code.
+
+------------------------------------------------------------------------------
+[Venkat 03/28/15 05:05 AM PDT]
+review: Reuse, reduce.
+
+MemoizedRecursiveFibonacci:
+See refactoring suggestion in code - reduce code.
+
+------------------------------------------------------------------------------
+[Venkat 03/27/15 05:42 AM MDT]
+review: Excellent progress
+
+MemoizedRecursiveFibonacciTest:
+memoizedVersionIsFasterThanRecursiveVersion:
+Notice the duplication within this test to measure the time.
+Remove that duplication, the two pieces of code are measuring
+the time, but for two different objects.
+
+Check to see the different is by at least one order of magnitude.
+
+------------------------------------------------------------------------------
+[Venkat 03/26/15 05:03 AM PDT]
+review: nice progress
+
+FibonacciTest:
+Make the field private.
+
+Don't reach into another class to set fields. Instead, override
+a method that returns an object that the base setUp can call to get
+the instance.
+
+RecursiveFibonacciTest:
+Nice work here.
+
+Good work, move forward.
+
+------------------------------------------------------------------------------
+[Venkat 03/25/15 05:07 AM PDT]
+review: Keep an eye on DRY.
+
+FibonacciTest:
+fibonacciWith0: Good. Next test should be for 1, stay with
+what you start and evolve the design. Then test for 2, and then
+for 7, then bring in negative test.
+
+Fibonacci:
+s => 
+to
+index =>
+
+Give space after comma to improve readability. Also space after =>.
+
+(tuple, sequence) =>{
+
+to
+(series, ignore) => {
+
+{ return ...; }
+to
+{ ... }
+
+
+RecursiveFibonacciTest:
+Notice all the tests here are the same as tests in FibonacciTest, 
+violates DRY. Remove the duplication.
+
+Then write a test to ensure the recursive solution is actually recursive,
+but without adding any new methods to the class under test.
+
+------------------------------------------------------------------------------
+
+[Venkat 03/24/15 05:48 AM PDT]
+review: good start
+
+FibonacciTest:
+good
+
+Fibonacci:
+Use functional style with immutability instead of imperative with mutability.
+Write just one function, avoid static.
+
+------------------------------------------------------------------------------
+

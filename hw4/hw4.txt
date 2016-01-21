@@ -1,0 +1,20 @@
+HW4 Due 11:59PM May 8th
+
+***There will be no reviews for this Homework***
+
+Write your answer in this file. No extra files will be graded.
+Give a collective answer as a pair, however, where needed, feel free to mention
+something specific to one person.
+
+1. What did you essentially learn in this course about design?
+
+We learned a lot about design practices and principals, but the thing that stood out this entire semester is don’t code a lot at a time and be comfortable to throw away code and try again. Learning to code small bits at a time prevents tunnel vision and allows us to make sure that small bit is correct. Coding small bits at a time also makes throwing away code easier. Being comfortable in admitting your mistakes and trying again is important in designing. Instead of coming up with workarounds it might be better to throw it away and try again. We should not expect to do something correctly or optimally the first time. Coding small bits at a time and being able to throw away code allows us to be more careful and make sure less goes wrong in the future.
+2. When asked to design a software application, how would you approach it?
+
+When asked to design a software application we will first make sure we understand the problem and its requirements. For the initial design we want to keep it at a high level and a not worry about classes and languages. We can decide on that based on what is needed for the software. We will also be using test driven development during the coding of the software. We will code in small chunks and use unit testing to make sure it works the way we want it to.
+
+3. What are some of the general guidelines you would follow when designing?
+
+We learned a lot of design principles we should follow when designing. Single responsibility principle is when every class should have responsibility over a single part the functionality of the software. Open close principle is when we shouldn’t have to modify the source code to add to it. The dry principle tells don’t repeat yourself and reuse the things you already have. Review code frequently to make sure we have good code quality and follow all principles. TDD is a good way to keep our code work all the time. It also notify us if something went wrong.
+
+Total [10]: 

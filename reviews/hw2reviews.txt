@@ -1,0 +1,25 @@
+[Venkat 02/12/15 16:04 PM MST]
+review: Fix a few things in the diagram
+
+Diagram:
+Don't show as a field what is shown also as a relationship.
+Show the GUI and how it is related to the classes with logic.
+Show cardinality of relationships.
+
+------------------------------------------------------------------------------
+
+[Venkat 02/10/15 05:15 AM CET]
+review: Keep writing cohesive and in short paragraphs
+
+hw2.txt:
+Wow, long paragraph, totally lost interest in reading this. Write short
+paragraphs, this tells you care to walk the reader from one concept to
+another.
+
+Keep the details high level, avoid low level sequences and flow chart
+at this time.
+
+Give UML diagram, discuss high level design ideas, interactions.
+
+------------------------------------------------------------------------------
+

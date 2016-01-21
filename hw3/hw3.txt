@@ -1,0 +1,31 @@
+HW3 Due 11:59PM Friday May 1st 
+
+1. Suppose you're given three different drones (Drone1, Drone2, Drone3) - 
+each drone represents a particular model of drone, but none of them share a 
+common or consistent API or interface. You are asked to design a TrackDrone in 
+a way that it can uniformly use all these three without changing any of them. 
+What design pattern is useful to achieve this goal?
+
+Adapter Pattern lets classes work together that couldn't otherwise because of incompatible interfaces.
+
+2. What classes would participate in the use of the above named pattern?
+
+We would have a Drone interface, with class Drone1Adapter1, Drone2Adapter2, Drone3Adapter3 implemented it.
+
+We will make each of the Drones to be a field in each of the Adapter. We are not changing any of the Drone, we are only using it.
+
+The class TrackDrone can now use the Drone interface with any type of Drone we want.
+
+3. Why would you choose to use this pattern?
+
+We want to use existing Drones, but their API are not consistent, we need to convert those Drone interfaces so it can match our interface without changing any of the Drone. Object Adapter Pattern would do the job by creating an Adapter that delegate the Drone. Our code now then can use the Drone through the Adapter we created.
+
+4. Are there any variations of this pattern? If so, what are those and discuss why you'd choose one over the other.
+
+There are two types of adapter patterns the Class Adapter and the Object Adapter. The Class Adapter give us substitutability because we can substitute the Adaptee with the Adapter. The Object Adapter provides more extensibility and flexibility than Class Adapter. Object Adapter can adapt many Adaptees, a class and its subclasses.
+
+Both the Class Adapter and Object Adapter can be used to solve this problem. Because we are just using the classes without needing to override any methods, we can use the Object adapter. We can also use the class adaptor because the drones are not final and we don't care for its subclasses.
+
+
+
+Total [10]: 10
